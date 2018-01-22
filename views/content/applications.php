@@ -80,6 +80,11 @@
             <h3 class="title"><?=$activity->name?> (<?=$activity->binary?>)</h3>
             <div class="description">
                 <form method="post" action="<?=$this->url($uri)?>#<?=$activity->id?>">
+                    <input type="hidden" name="day" value="<?=$day?>" />
+                    <input type="hidden" name="month" value="<?=$month?>" />
+                    <input type="hidden" name="year" value="<?=$year?>" />
+                    <input type="hidden" name="type" value="<?=$type?>" />
+
                     <input
                         type="hidden"
                         name="activity"
@@ -94,7 +99,7 @@
                     />
 
                     <?php $types = new \InFocus\Lists\Types() ?>
-                    <select name="type">
+                    <select name="type_value">
                     <?php foreach($types->getAll() as $type){ ?>
                         <?php
                             $selected = $activity->type == $type->id ?

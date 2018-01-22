@@ -377,6 +377,16 @@ h3
     border-bottom: solid 2px #333;
 }
 
+span.highlight
+{
+    color: #0088AA;
+}
+
+h3 span.highlight
+{
+    font-size: 22px;
+}
+
 input[type=text], input[type=submit], button, select, textarea
 {
     transition: all 0.3s;

@@ -4,7 +4,7 @@ Automatic activity time tracker application.
 
 **OS:** Linux
 **License:** GPLv3
-**Status:** Alpha
+**Status:** Beta
 
 ## About
 
@@ -57,11 +57,11 @@ cd infocus
 DESTDIR=~/infocus/install ./install.sh
 ```
 
-### Uninstallation (not implemented yet)
+### Uninstallation
 
 ```shell
 cd infocus
-./install remove
+./install.sh remove
 ```
 
 ## Usage

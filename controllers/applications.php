@@ -53,7 +53,7 @@ $controller->onPostRequest = function(InFocus\Web\Controller $self){
 
     $activity_id = intval($request->getParam("activity", "0"));
     $description = strval($request->getParam("description", ""));
-    $type = intval($request->getParam("type", "1"));
+    $type = intval($request->getParam("type_value", "1"));
 
     if($activity_id)
     {

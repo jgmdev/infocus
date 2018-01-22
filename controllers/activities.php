@@ -18,6 +18,15 @@ $controller->onGetRequest = function(InFocus\Web\Controller $self){
     $year = intval($request->getParam("year"));
     $activity = strval($request->getParam("activity"));
     $type = intval($request->getParam("type"));
+    $title = strval($request->getParam("title"));
+    $change_type = trim(strval($request->getParam("change_type")));
+    $new_type = intval($request->getParam("new_type"));
+    $keywords = array();
+
+    if($title)
+    {
+        $keywords = array_unique(preg_split("/\s+/", trim($title)));
+    }
 
     if($request->getParam("today"))
     {
@@ -28,8 +37,15 @@ $controller->onGetRequest = function(InFocus\Web\Controller $self){
 
     $subactivities = new \InFocus\Lists\SubActivities();
 
+    if($change_type && $new_type)
+    {
+        $subactivities->updateWithNewType(
+            $day, $month, $year, $activity, $type, $title, $new_type
+        );
+    }
+
     $subactivities_list = $subactivities->getWithTime(
-        $day, $month, $year, $activity, $type
+        $day, $month, $year, $activity, $type, $title
     );
 
     $self->view->setContent(
@@ -41,7 +57,9 @@ $controller->onGetRequest = function(InFocus\Web\Controller $self){
                 "month" => $month,
                 "year" => $year,
                 "activity" => $activity,
-                "type" => $type
+                "type" => $type,
+                "title" => $title,
+                "keywords" => $keywords
             )
         )
     );
@@ -55,7 +73,7 @@ $controller->onPostRequest = function(InFocus\Web\Controller $self){
     $request = $self->request;
 
     $activity_id = intval($request->getParam("subactivity", "0"));
-    $type = intval($request->getParam("type", "1"));
+    $type = intval($request->getParam("type_value", "1"));
 
     if($activity_id)
     {

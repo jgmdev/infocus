@@ -60,13 +60,14 @@ class SubActivities extends \InFocus\ActivityDB
         int $month=0,
         int $year=0,
         string $app_name="",
-        int $type=0
+        int $type=0,
+        string $title=""
     )
     {
         $activities = array();
 
         $where = "";
-        if($day || $month || $year || $app_name || $type)
+        if($day || $month || $year || $app_name || $type || $title)
         {
             $where .= "where ";
 
@@ -110,6 +111,27 @@ class SubActivities extends \InFocus\ActivityDB
                 $where .= "type = ". intval($type) . " "
                 ;
             }
+
+            if($title)
+            {
+                if(trim($title) != "")
+                {
+                    if($where != "where ")
+                        $where .= "and ";
+
+                    $keywords = preg_split("/\s+/", trim($title));
+
+                    $where .= "(";
+                    foreach($keywords as $keyword)
+                    {
+                        $keyword = trim(str_replace("'", "''", $keyword));
+
+                        $where .= "window_title like '%".$keyword."%' and ";
+                    }
+                    $where = rtrim($where, "and ");
+                    $where .= ") ";
+                }
+            }
         }
 
         $statement = $this->database->query(
@@ -147,5 +169,99 @@ class SubActivities extends \InFocus\ActivityDB
         }
 
         return $activities;
+    }
+
+    /**
+     * Gets a list of all activities accompanied by its time usage:
+     * activity->total_time and activity->usage_percent.
+     * @param int $day
+     * @param int $month
+     * @param int $year
+     */
+    public function updateWithNewType(
+        int $day,
+        int $month,
+        int $year,
+        string $app_name,
+        int $type,
+        string $title,
+        int $new_type
+    )
+    {
+        $activities = array();
+
+        $where = "";
+        if($day || $month || $year || $app_name || $type || $title)
+        {
+            $where .= "where ";
+
+            if($day)
+            {
+                $where .= "day = " . intval($day) . " ";
+            }
+
+            if($month)
+            {
+                if($where != "where ")
+                    $where .= "and ";
+
+                $where .= "month = " . intval($month) . " ";
+            }
+
+            if($year)
+            {
+                if($where != "where ")
+                    $where .= "and ";
+
+                $where .= "year = " . intval($year) . " ";
+            }
+
+            if($app_name)
+            {
+                if($where != "where ")
+                    $where .= "and ";
+
+                $where .= "application_name = '"
+                    . str_replace("'", "''", $app_name)
+                    . "' "
+                ;
+            }
+
+            if($type)
+            {
+                if($where != "where ")
+                    $where .= "and ";
+
+                $where .= "type = ". intval($type) . " "
+                ;
+            }
+
+            if($title)
+            {
+                if(trim($title) != "")
+                {
+                    if($where != "where ")
+                        $where .= "and ";
+
+                    $keywords = preg_split("/\s+/", trim($title));
+
+                    $where .= "(";
+                    foreach($keywords as $keyword)
+                    {
+                        $keyword = trim(str_replace("'", "''", $keyword));
+
+                        $where .= "window_title like '%".$keyword."%' and ";
+                    }
+                    $where = rtrim($where, "and ");
+                    $where .= ") ";
+                }
+            }
+        }
+
+        $this->database->exec(
+            "update activity_log "
+            . "set type = " . intval($new_type) . " "
+            . $where
+        );
     }
 }

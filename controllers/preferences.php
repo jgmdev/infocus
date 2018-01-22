@@ -46,7 +46,6 @@ $controller->onPostRequest = function(InFocus\Web\Controller $self){
 
     $log_service = intval($request->getParam("log_service", "0"));
     $timezone = strval($request->getParam("timezone", "UTC"));
-    $setup = strval($request->getParam("setup"));
 
     $systemd_disabled = exec("systemctl --user status infocus | grep disabled");
     $systemd_inactive = exec("systemctl --user status infocus | grep inactive");
@@ -59,6 +58,8 @@ $controller->onPostRequest = function(InFocus\Web\Controller $self){
 
     $settings = new InFocus\Settings("InFocus");
     $settings->set("timezone", $timezone);
+
+    $setup = $settings->get("setup");
 
     if($log_service && $systemd_disabled)
     {

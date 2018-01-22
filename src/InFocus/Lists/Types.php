@@ -141,18 +141,26 @@ class Types extends \InFocus\ActivityDB
         {
             $score = 0;
 
-            $tags = preg_split("/\s+/", $type->tags);
+            $tags = preg_split("/\s+/", trim($type->tags));
 
             foreach($tags as $tag)
             {
-                $tag = trim($tag);
-
-                if($tag)
+                if($tag != "")
                 {
                     $score += substr_count(
                         strtolower($window->title),
                         strtolower($tag)
                     );
+
+                    $percent = 0;
+
+                    similar_text(
+                        strtolower($window->title),
+                        strtolower($tag),
+                        $percent
+                    );
+
+                    $score += $percent;
                 }
             }
 

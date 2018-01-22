@@ -84,6 +84,38 @@
     <input type="submit" value="Filter" />
 
     <input type="submit" name="today" value="Today" />
+
+    <div style="padding: 10px 0 10px 0; margin-top: 20px; border-top: solid 1px #d3d3d3;">
+        <input
+            type="text"
+            name="title"
+            value="<?=$title?>"
+            placeholder="text in window"
+        />
+
+        <input type="submit" value="Lookup" />
+
+        <?php if($title){ ?>
+        <?php $types = new \InFocus\Lists\Types() ?>
+        <select name="new_type">
+            <option value="">
+                Set New Type
+            </option>
+        <?php foreach($types->getAll() as $type_data){ ?>
+            <?php
+                $selected = $type_data->id == $new_type ?
+                    "selected=\"selected\"" : ""
+                ;
+            ?>
+            <option <?=$selected?> value="<?=$type_data->id?>">
+                <?=$type_data->name?>
+            </option>
+        <?php } ?>
+        </select>
+
+        <input type="submit" name="change_type" value="Change all Results" />
+        <?php } ?>
+    </div>
 </form>
 
 <?php if($activity){ ?>
@@ -111,14 +143,42 @@
         <?php } ?>
         <div class="info">
             <a name="<?=$subactivity->id?>"></a>
-            <h3 class="title"><?=$subactivity->window_title?> (<?=$subactivity->application_name?>)</h3>
+            <h3 class="title">
+                <?php
+                    if($keywords)
+                    {
+                        $keywords_strong = array();
+
+                        foreach($keywords as $keyword)
+                        {
+                            $keywords_strong[] = "<span class=\"highlight\">"
+                                . $keyword
+                                . "</span>"
+                            ;
+                        }
+
+                        print str_ireplace(
+                            $keywords,
+                            $keywords_strong,
+                            $subactivity->window_title
+                        );
+                    }
+                    else
+                    {
+                        print $subactivity->window_title;
+                    }
+
+                ?>
+                (<?=$subactivity->application_name?>)
+            </h3>
             <div class="description">
                 <form method="post" action="<?=$this->url($uri)?>#<?=$subactivity->id?>">
-                    <input
-                        type="hidden"
-                        name="activity"
-                        value="<?=$activity?>"
-                    />
+                    <input type="hidden" name="day" value="<?=$day?>" />
+                    <input type="hidden" name="month" value="<?=$month?>" />
+                    <input type="hidden" name="year" value="<?=$year?>" />
+                    <input type="hidden" name="type" value="<?=$type?>" />
+                    <input type="hidden" name="title" value="<?=$title?>" />
+                    <input type="hidden" name="activity" value="<?=$activity?>" />
 
                     <input
                         type="hidden"
@@ -127,7 +187,7 @@
                     />
 
                     <?php $types = new \InFocus\Lists\Types() ?>
-                    <select name="type">
+                    <select name="type_value">
                     <?php foreach($types->getAll() as $type){ ?>
                         <?php
                             $selected = $subactivity->type == $type->id ?
