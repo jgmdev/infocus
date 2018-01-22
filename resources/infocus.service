@@ -1,0 +1,11 @@
+[Unit]
+Description=InFocus activity time tracker
+Documentation=http://github.com/jgmdev/infocus
+After=display-manager.service
+
+[Service]
+ExecStart=/usr/bin/infocus log
+Restart=always
+
+[Install]
+WantedBy=default.target

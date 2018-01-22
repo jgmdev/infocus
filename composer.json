@@ -1,0 +1,18 @@
+{
+    "name": "jgmdev/infocus",
+    "description": "A linux time tracking application.",
+    "type": "project",
+    "homepage": "http://github.com/jgmdev/infocus",
+    "require-dev": {},
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Jefferson González",
+            "email": "jgmdev@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "slim/slim": "^3.0"
+    }
+}

@@ -1,0 +1,407 @@
+body
+{
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    color: #333;
+}
+
+body *
+{
+    box-sizing: border-box;
+    font-size: 18px;
+}
+
+a {text-decoration: none; transition: all 0.3s;}
+
+h1
+{
+    padding: 10px;
+    margin: 0;
+    width: 100%;
+    font-size: 45px;
+    color: #333;
+    text-align: center;
+}
+
+h3
+{
+    font-size: 22px;
+}
+
+#main-container
+{
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+}
+
+#menu
+{
+    background-color: #d3d3d3;
+    width: 320px;
+    top: 0;
+    position:fixed;
+    height: 100%;
+}
+
+#menu ul
+{
+    display: block;
+    margin: 50px 0 0 0;
+    padding: 0;
+}
+
+#menu ul li
+{
+    list-style: none;
+    display: block;
+    padding: 0;
+    margin: 0;
+}
+
+#menu ul li a
+{
+    list-style: none;
+    display: block;
+    padding: 20px 10px 20px 10px;
+    border-bottom: dotted 1px #333;
+    color: #000;
+    font-weight: bold;
+}
+
+#menu ul li a.active, #menu ul li a:hover
+{
+    background-color: #00AA88;
+    color: #fff;
+}
+
+#logo
+{
+    text-align: center;
+    padding: 10px;
+}
+
+#logo img
+{
+    width: 250px;
+    display: inline-block;
+    margin: 15px auto 0 auto;
+}
+
+#content
+{
+    flex-grow: 1;
+    width: 100%;
+    margin-left: 320px;
+}
+
+#content .container
+{
+    padding: 20px 10px 20px 10px;
+}
+
+.list .item
+{
+    transition: all 0.5s;
+    display: flex;
+    justify-content: center;
+    height: 200px;
+    border-bottom: dotted 2px #d3d3d3;
+    align-items: center;
+}
+
+.list .item:hover
+{
+    background-color: #eee;
+}
+
+.form .item
+{
+    transition: all 0.5s;
+    display: flex;
+    justify-content: center;
+    height: 150px;
+    border-bottom: solid 1px #d3d3d3;
+    align-items: center;
+}
+
+.form .item:last-child
+{
+    border-bottom: none;
+}
+
+.form div.label
+{
+    font-weight: bold;
+    text-align: right;
+    padding: 20px;
+    font-size: 26px;
+    flex-grow: 1;
+    width: 100%;
+}
+
+.form div.label .description
+{
+    font-weight: normal;
+    color: #707070;
+    font-size: 16px;
+}
+
+.form div.field
+{
+    text-align: left;
+    flex-grow: 1;
+    width: 100%;
+}
+
+.form div.field label
+{
+    font-size: 22px;
+}
+
+.grid
+{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.grid .item
+{
+    text-align: center;
+    padding: 20px;
+    width: 200px;
+}
+
+.grid .item:hover
+{
+    background-color: #eee;
+}
+
+.grid .item a
+{
+    color: #333;
+}
+
+.grid .item a:hover
+{
+    background-color: transparent;
+}
+
+.grid .item img
+{
+    height: 150px;
+}
+
+.grid .item .name
+{
+    padding-top: 7px;
+    font-weight: bold;
+}
+
+#applications .icon
+{
+    width: 80px;
+    align-self: center;
+    padding: 10px;
+}
+
+#applications .icon img
+{
+    width: 64px;
+}
+
+#applications .info
+{
+    flex-grow: 2;
+    text-align: left;
+    padding: 20px;
+    max-width: 800px;
+}
+
+#applications .info h3
+{
+    margin: 0 0 10px 0;
+    padding: 0;
+}
+
+#applications .info input[type=text]
+{
+    width: 50%;
+}
+
+#applications .progress
+{
+    flex-grow: 1;
+    padding: 20px;
+}
+
+#applications .progress .line
+{
+    border: solid 1px #00AA88;
+    width: 100%;
+}
+
+#applications .progress .amount
+{
+    padding: 10px;
+    background-color: #0088AA;
+}
+
+#applications .progress .usage
+{
+    text-align: center;
+    padding-top: 5px;
+}
+
+#applications .actions
+{
+    padding: 20px;
+}
+
+#overview .item
+{
+    height: auto;
+    padding: 20px 0 20px 0;
+}
+
+#overview .info
+{
+    width: 400px;
+    padding: 20px;
+}
+
+#overview .info input[type=text]
+{
+    width: 100%;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+#overview .info textarea
+{
+    width: 100%;
+    height: 100px;
+}
+
+#overview .progress
+{
+    flex-grow: 1;
+    padding: 20px;
+}
+
+#overview .progress .line
+{
+    border: solid 1px #00AA88;
+    width: 100%;
+}
+
+#overview .progress .amount
+{
+    padding: 10px;
+    background-color: #0088AA;
+}
+
+#overview .progress .usage
+{
+    text-align: center;
+    padding-top: 5px;
+}
+
+#overview .actions
+{
+    padding: 20px;
+}
+
+#add-type
+{
+    background-color: #eee;
+    border: solid 1px #333;
+    padding: 20px;
+}
+
+#add-type textarea
+{
+    width: 100%;
+    margin: 10px 0 10px 0;
+}
+
+#application-info
+{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: solid 1px #333;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+#application-info img
+{
+    width: 200px;
+}
+
+#application-info .info
+{
+    padding: 30px;
+}
+
+#application-info .info h3
+{
+    margin: 0 0 15px 0;
+    padding: 0;
+}
+
+#message
+{
+    background-color: #00AA88;
+    padding: 20px;
+    font-size: 28px;
+    color: #fff;
+    text-align: center;
+}
+
+#message a
+{
+    font-size: 28px;
+    color: #333;
+    display: inline-block;
+    border-bottom: solid 2px transparent;
+}
+
+#message a:hover
+{
+    background-color: transparent;
+    border-bottom: solid 2px #333;
+}
+
+input[type=text], input[type=submit], button, select, textarea
+{
+    transition: all 0.3s;
+    background-color: #fff;
+    box-shadow: 0 0 1px #00AA88;
+}
+
+input[type=text], textarea, select
+{
+    border: solid 1px #d3d3d3;
+    padding: 10px;
+}
+
+input[type=submit], input[type=reset], button, a.button
+{
+    border: solid 1px #d3d3d3;
+    padding: 11px 30px 11px 30px;
+    background-color: #00AA88;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+}
+
+input[type=submit]:hover, input[type=reset]:hover, button:hover, a:hover
+{
+    background-color: #333;
+}

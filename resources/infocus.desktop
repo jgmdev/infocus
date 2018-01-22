@@ -1,0 +1,14 @@
+[Desktop Entry]
+Version=1.0
+Name=InFocus
+GenericName=Activity Tracker
+GenericName[es]=Rastreador de Actividades
+Comment=Monitor your daily activities
+Comment[es]=Monitoree sus actividades diarias
+Exec=/usr/bin/infocus ui
+Icon=infocus
+Terminal=false
+Type=Application
+StartupWMClass=InFocus
+Categories=Office;
+Keywords=time;tracker;log;
