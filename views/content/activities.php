@@ -118,6 +118,8 @@
     </div>
 </form>
 
+<?php $global_type = $type; ?>
+
 <?php if($activity){ ?>
 <?php
     $activity_data = new InFocus\Element\Activity();
@@ -176,7 +178,7 @@
                     <input type="hidden" name="day" value="<?=$day?>" />
                     <input type="hidden" name="month" value="<?=$month?>" />
                     <input type="hidden" name="year" value="<?=$year?>" />
-                    <input type="hidden" name="type" value="<?=$type?>" />
+                    <input type="hidden" name="type" value="<?=$global_type?>" />
                     <input type="hidden" name="title" value="<?=$title?>" />
                     <input type="hidden" name="activity" value="<?=$activity?>" />
 

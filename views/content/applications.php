@@ -69,6 +69,8 @@
     <input type="submit" name="today" value="Today" />
 </form>
 
+<?php $global_type = $type; ?>
+
 <div id="applications" class="list">
     <?php foreach($activities as $activity){ ?>
     <div class="item">
@@ -83,7 +85,7 @@
                     <input type="hidden" name="day" value="<?=$day?>" />
                     <input type="hidden" name="month" value="<?=$month?>" />
                     <input type="hidden" name="year" value="<?=$year?>" />
-                    <input type="hidden" name="type" value="<?=$type?>" />
+                    <input type="hidden" name="type" value="<?=$global_type?>" />
 
                     <input
                         type="hidden"
