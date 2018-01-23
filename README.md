@@ -21,7 +21,7 @@ schedule.
 ## Installation
 
 The application is developed in PHP and makes use of php's built-in webserver
-to host the user interface and makes use of chromium or firefox as mediums
+to host the user interface and uses of chromium or firefox as mediums
 to display the web interface. Currently the --app flag of chromium is used
 to get an experience more similar to that of a typical application.
 
