@@ -135,6 +135,13 @@ class Types extends \InFocus\ActivityDB
         bool $try_parent=true
     ):int
     {
+        // First try to get same type of a previous identical activity.
+        if($type_id = $this->getPreviousType($window))
+        {
+            return $type_id;
+        }
+
+        // Check each type for a best match
         $types = $this->getAll();
 
         $max_score = 0;
@@ -195,6 +202,43 @@ class Types extends \InFocus\ActivityDB
         }
 
         return $type_id;
+    }
+
+    /**
+     * Get the type of a previously registered window that matches the given
+     * window.
+     * @param \InFocus\WM\Window $window
+     * @return int Id of type or 0 if no matching window was found.
+     */
+    public function getPreviousType(
+        \InFocus\WM\Window $window
+    ):int
+    {
+        $statement = $this->database->prepare(
+            "select * "
+            . "from activity_log "
+            . "where "
+            . "application_name = ? and "
+            . "window_title = ? "
+            . "limit 1"
+        );
+
+        if(
+            $statement->execute(
+                array(
+                    $window->process_name,
+                    $window->title
+                )
+            )
+        )
+        {
+            if($data = $statement->fetch(\PDO::FETCH_ASSOC))
+            {
+                return $data["type"];
+            }
+        }
+
+        return 0;
     }
 
     /**
