@@ -21,8 +21,8 @@ schedule.
 ## Installation
 
 The application is developed in PHP and makes use of php's built-in webserver
-to host the user interface and uses of chromium or firefox as mediums
-to display the web interface. Currently the --app flag of chromium is used
+to host the user interface and uses chromium or firefox as a medium
+to display the web interface. Currently the --app flag of chromium is employed
 to get an experience more similar to that of a typical application.
 
 Before using the application you have to fetch the composer dependencies by
