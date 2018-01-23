@@ -2,6 +2,8 @@
 
 Automatic activity time tracker application.
 
+[InFocus Logo](https://raw.githubusercontent.com/jgmdev/infocus/master/static/images/logo.png)
+
 **OS:** Linux
 **License:** GPLv3
 **Status:** Beta
@@ -88,3 +90,20 @@ For help on the available infocus commands, at your shell just invoke:
 ```shell
 infocus help
 ```
+
+## Screenshots
+
+**Overview**
+[overview](https://raw.githubusercontent.com/jgmdev/infocus/master/screenshots/overview.png)
+
+**Applications**
+[applications](https://raw.githubusercontent.com/jgmdev/infocus/master/screenshots/applications.png)
+
+**Activities**
+[activities](https://raw.githubusercontent.com/jgmdev/infocus/master/screenshots/activities.png)
+
+**Inactivity**
+[inactivity](https://raw.githubusercontent.com/jgmdev/infocus/master/screenshots/inactivity.png)
+
+**Preferences**
+[preferences](https://raw.githubusercontent.com/jgmdev/infocus/master/screenshots/preferences.png)
