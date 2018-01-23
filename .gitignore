@@ -3,3 +3,5 @@
 *.workspace
 vendor
 composer.lock
+pkg
+*.tar.xz
