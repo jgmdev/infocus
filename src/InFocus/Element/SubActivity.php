@@ -149,13 +149,16 @@ class SubActivity extends \InFocus\ActivityDB
         $statement = $this->database->prepare(
             "update activity_log set "
             . "type = ? "
-            . "where id = ?"
+            . "where "
+            . "application_name = ? and "
+            . "window_title = ?"
         );
 
         return $statement->execute(
             array(
                 $this->type,
-                $this->id
+                $this->application_name,
+                $this->window_title
             )
         );
     }
