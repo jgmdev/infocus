@@ -2,7 +2,7 @@
 
 Automatic activity time tracker application.
 
-[InFocus Logo](https://raw.githubusercontent.com/jgmdev/infocus/master/static/images/logo.png)
+![InFocus Logo](https://raw.githubusercontent.com/jgmdev/infocus/master/static/images/logo.png)
 
 **OS:** Linux
 **License:** GPLv3
@@ -94,16 +94,16 @@ infocus help
 ## Screenshots
 
 **Overview**
-[overview](https://raw.githubusercontent.com/jgmdev/infocus/master/screenshots/overview.png)
+![overview](https://raw.githubusercontent.com/jgmdev/infocus/master/screenshots/overview.png)
 
 **Applications**
-[applications](https://raw.githubusercontent.com/jgmdev/infocus/master/screenshots/applications.png)
+![applications](https://raw.githubusercontent.com/jgmdev/infocus/master/screenshots/applications.png)
 
 **Activities**
-[activities](https://raw.githubusercontent.com/jgmdev/infocus/master/screenshots/activities.png)
+![activities](https://raw.githubusercontent.com/jgmdev/infocus/master/screenshots/activities.png)
 
 **Inactivity**
-[inactivity](https://raw.githubusercontent.com/jgmdev/infocus/master/screenshots/inactivity.png)
+![inactivity](https://raw.githubusercontent.com/jgmdev/infocus/master/screenshots/inactivity.png)
 
 **Preferences**
-[preferences](https://raw.githubusercontent.com/jgmdev/infocus/master/screenshots/preferences.png)
+![preferences](https://raw.githubusercontent.com/jgmdev/infocus/master/screenshots/preferences.png)
