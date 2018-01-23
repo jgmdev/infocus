@@ -130,7 +130,10 @@ class Types extends \InFocus\ActivityDB
      * of the application/activity that owns the window.
      * @return int Id of type.
      */
-    public function getBestMatch(\InFocus\WM\Window $window, bool $try_parent=true):int
+    public function getBestMatch(
+        \InFocus\WM\Window $window,
+        bool $try_parent=true
+    ):int
     {
         $types = $this->getAll();
 
@@ -147,20 +150,25 @@ class Types extends \InFocus\ActivityDB
             {
                 if($tag != "")
                 {
-                    $score += substr_count(
+                    $words_found = substr_count(
                         strtolower($window->title),
                         strtolower($tag)
                     );
 
-                    $percent = 0;
+                    $score += $words_found;
 
-                    similar_text(
-                        strtolower($window->title),
-                        strtolower($tag),
-                        $percent
-                    );
+                    if($words_found)
+                    {
+                        $percent = 0;
 
-                    $score += $percent;
+                        similar_text(
+                            strtolower($tag),
+                            strtolower($window->title),
+                            $percent
+                        );
+
+                        $score += $percent;
+                    }
                 }
             }
 
