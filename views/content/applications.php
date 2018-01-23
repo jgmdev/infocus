@@ -129,7 +129,7 @@
         <div class="actions">
             <a
                 class="button"
-                href="<?=$this->url("activities", array("activity"=>$activity->binary, "day"=>$this->request->getParam("day"), "month"=>$this->request->getParam("month"), "year"=>$this->request->getParam("year")))?>"
+                href="<?=$this->url("activities", array("activity"=>$activity->binary, "day"=>$day, "month"=>$month, "year"=>$year))?>"
             >
                 Activities
             </a>
