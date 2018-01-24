@@ -60,9 +60,13 @@ class Manager
         );
 
         if(!$window_id)
-            throw new \Exception(
-                "Desktop session not found."
-            );
+        {
+            print "Desktop session not found.\n"
+                . "Ending the activity logger.\n"
+            ;
+
+            exit(1);
+        }
 
         $window_id = str_replace("0x", "", $window_id);
         $window_id = "0x" . str_pad($window_id, 8, "0", STR_PAD_LEFT);
