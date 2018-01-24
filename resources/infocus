@@ -14,7 +14,7 @@ fi
 
 runui()
 {
-    local port=8080
+    local port=8079
 
     if [ "$1" != "" ]; then
         if [ "$1" != "ui" ]; then
@@ -22,11 +22,23 @@ runui()
         fi
     fi
 
-    until php -d extension=pdo_sqlite.so -d open_basedir="" -S localhost:$port  & 2> /dev/null; do
+    local port_open=0
+    local server=""
+
+    until [ $port_open -eq 1 ]; do
         port=$(($port+1))
+
+        port_open=$(netstat -an | grep $port | grep LISTEN)
+
+        if [ "$port_open" = "" ]; then
+            port_open=1
+        fi
     done
 
-    local server=$!
+    php -d extension=pdo_sqlite.so -d open_basedir='' -S localhost:$port &
+
+    server=$(pgrep -n -f php)
+
     local browser=""
 
     local chromium_installed=$(command -v chromium)
