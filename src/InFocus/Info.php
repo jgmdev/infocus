@@ -20,7 +20,7 @@ class Info
     /**
      * @var string
      */
-    public static $version = "0.1";
+    public static $version = "0.5";
 
     /**
      * @var string

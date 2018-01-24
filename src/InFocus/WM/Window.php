@@ -68,6 +68,25 @@ class Window
     }
 
     /**
+     * Populates the window name, process name and icon path from an
+     * existing activity.
+     * @param \InFocus\Element\Activity $activity
+     * @return \InFocus\WM\Window
+     */
+    public function setWindowFromActivity(\InFocus\Element\Activity $activity):Window
+    {
+        $this->name = $activity->name;
+
+        $this->process_name = $activity->binary;
+
+        $this->icon_name = $activity->icon_name;
+
+        $this->icon_path == $activity->icon_path;
+
+        return $this;
+    }
+
+    /**
      * Populates the window data from parsing a line result returned by
      * the 'wmctrl -lpx' command.
      * @param string $line
@@ -109,21 +128,7 @@ class Window
 
         $this->process_name = end(explode("/", $this->process_name));
 
-        $current_icon_theme = "";
-        if($_SERVER["DESKTOP_SESSION"] == "xfce")
-        {
-            $current_icon_theme = trim(
-                exec("xfconf-query -c xsettings -p /Net/IconThemeName")
-            );
-        }
-        else
-        {
-            $current_icon_theme = trim(
-                exec("gsettings get org.gnome.desktop.interface icon-theme")
-            );
-        }
-
-        $current_icon_theme = trim($current_icon_theme, "'");
+        $current_icon_theme = $this->getCurrentIconTheme();
 
         $this->setIconFromTheme($current_icon_theme);
 
@@ -146,6 +151,7 @@ class Window
                 $this->setIconFromTheme("hicolor");
             }
 
+            // Not able to find an icon
             if($this->icon_path == "" && trim($previus_process_name) != "")
             {
                 $this->process_name = $previus_process_name;
@@ -157,7 +163,12 @@ class Window
         return $this;
     }
 
-    public function setIconFromTheme(string $theme):Window
+    /**
+     * Sets the icon name and path for the current window.
+     * @param string $theme
+     * @return bool
+     */
+    public function setIconFromTheme(string $theme):bool
     {
         if(
             file_exists(
@@ -180,8 +191,58 @@ class Window
             );
 
             $this->icon_path = $icon_path ?? "";
+
+            return empty($this->icon_path) ? false : true;
         }
 
-        return $this;
+        return false;
+    }
+
+    /**
+     * Get the user theme used to retrieve the icons.
+     * @return string
+     */
+    public function getCurrentIconTheme():string
+    {
+        $theme = "";
+
+        $desktop = "";
+
+        if(isset($_SERVER["DESKTOP_SESSION"]))
+        {
+            $desktop = $_SERVER["DESKTOP_SESSION"];
+        }
+        else
+        {
+            if(exec("command -v xfconf-query"))
+            {
+                $desktop = "xfce";
+            }
+            elseif(exec("command -v gsettings"))
+            {
+                $desktop = "gnome";
+            }
+        }
+
+        if($desktop == "xfce")
+        {
+            $theme = trim(
+                exec("xfconf-query -c xsettings -p /Net/IconThemeName")
+            );
+        }
+        elseif($desktop == "gnome" && exec("command -v gsettings"))
+        {
+            $theme = trim(
+                exec("gsettings get org.gnome.desktop.interface icon-theme")
+            );
+
+            $theme = trim($theme, "'");
+        }
+        else
+        {
+            $theme = "hicolor";
+        }
+
+        return $theme;
     }
 }

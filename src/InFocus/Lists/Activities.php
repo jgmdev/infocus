@@ -26,8 +26,6 @@ class Activities extends \InFocus\ActivityDB
      */
     public function getAll()
     {
-        $activities = array();
-
         $statement = $this->database->query(
             "select * from activities"
         );
@@ -41,10 +39,8 @@ class Activities extends \InFocus\ActivityDB
                 $activity->$name = $value;
             }
 
-            $activities[] = $activity;
+            yield $activity;
         }
-
-        return $activities;
     }
 
     /**
@@ -132,5 +128,29 @@ class Activities extends \InFocus\ActivityDB
         }
 
         return $activities;
+    }
+
+    public function updateActivityIcons()
+    {
+        /** @var $activity \InFocus\Element\Activity */
+
+        foreach($this->getAll() as $activity)
+        {
+            $window = new \InFocus\WM\Window();
+
+            $window->setWindowFromActivity($activity);
+
+            $window->setIconFromTheme($window->getCurrentIconTheme());
+
+            if(!file_exists($window->icon_path))
+            {
+                $window->setIconFromTheme("hicolor");
+            }
+
+            $activity->icon_name = $window->icon_name;
+            $activity->icon_path = $window->icon_path;
+
+            $activity->update();
+        }
     }
 }

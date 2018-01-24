@@ -31,8 +31,10 @@ class Log extends \Utils\CommandLine\Command
         while(!$setup_ready)
         {
             $settings = new \InFocus\Settings("InFocus");
+            $setup = $settings->get("setup");
+            unset($settings);
 
-            if($settings->get("setup"))
+            if($setup)
             {
                 $setup_ready = true;
             }
@@ -42,6 +44,12 @@ class Log extends \Utils\CommandLine\Command
             }
         }
         echo "(done)\n";
+
+        echo "Updating application icons.\n";
+
+        $activities = new \InFocus\Lists\Activities();
+        $activities->updateActivityIcons();
+        unset($activities);
 
         echo "Starting activity logger.\n";
         $activity_logger = new \InFocus\ActivityLogger();
