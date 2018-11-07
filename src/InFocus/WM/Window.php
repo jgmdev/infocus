@@ -183,14 +183,29 @@ class Window
 
             $this->icon_name = trim(explode("Icon=", $icon)[1]);
 
-            $icon_path = exec(
-                "find "
-                . "/usr/share/icons/'$theme' "
-                . "-name \"{$this->icon_name}.*\" "
-                . "| sort -h "
-            );
+            // Correctly handle hard coded icon path.
+            if(strstr($this->icon_name, "/") !== false)
+            {
+                $this->icon_path = $this->icon_name;
 
-            $this->icon_path = $icon_path ?? "";
+                $image_name = explode(
+                    ".", end(explode("/", $this->icon_name))
+                );
+                unset($image_name[count($image_name)-1]);
+                $this->icon_name = implode(".", $image_name);
+            }
+            // Handle normal icons without path
+            else
+            {
+                $icon_path = exec(
+                    "find "
+                    . "/usr/share/icons/'$theme' "
+                    . "-name \"{$this->icon_name}.*\" "
+                    . "| sort -h "
+                );
+
+                $this->icon_path = $icon_path ?? "";
+            }
 
             return empty($this->icon_path) ? false : true;
         }
