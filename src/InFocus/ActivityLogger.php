@@ -127,7 +127,16 @@ class ActivityLogger extends ActivityDB
 
     private function registerShutdownInactivity():void
     {
-        $last_activity = $this->settings->get("last_activity_time");
+        $last_activity_time = $this->settings->home_directory
+            . "/last_activity_time"
+        ;
+
+        $last_activity = "";
+
+        if(file_exists($last_activity_time))
+        {
+            $last_activity = filemtime($last_activity_time);
+        }
 
         if($last_activity != "")
         {
@@ -172,7 +181,7 @@ class ActivityLogger extends ActivityDB
             }
         }
 
-        $this->settings->set("last_activity_time", time());
+        touch($last_activity_time);
     }
 
     private function registerApplication(WM\Window $window):void
