@@ -68,7 +68,7 @@ class Manager
             exit(1);
         }
 
-        $window_id = str_replace("0x", "", $window_id);
+        $window_id = str_replace("0x", "", trim(trim($window_id, ",")));
         $window_id = "0x" . str_pad($window_id, 8, "0", STR_PAD_LEFT);
 
         $window_string = `wmctrl -lpx | grep $window_id`;
