@@ -56,9 +56,15 @@ runui()
 
     local id=$(pgrep -n -f $browser)
 
-    while [ "$(ps -A | grep $id)" != "" ]; do
-        sleep 1
-    done
+    if [ "$browser" != "chromium" ]; then
+        while [ "$(ps -A | grep $id)" != "" ]; do
+            sleep 10
+        done
+    else
+        while [ "$(wmctrl -l | grep '\- InFocus')" != "" ]; do
+            sleep 10
+        done
+    fi
 
     echo -n "Shutting webserver down... "
     kill $server
