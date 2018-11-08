@@ -18,7 +18,7 @@ date_default_timezone_set($settings->get("timezone", exec("date +%Z")));
 $cli = new Utils\CommandLine\Parser();
 
 $cli->application_name = "infocus";
-$cli->application_version = "1.0";
+$cli->application_version = "0.6";
 $cli->application_description = "A time tracker application that monitors your "
     . "activity so you can evaluate how \nyou are spending your time on the "
     . "computer."
