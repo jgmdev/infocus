@@ -190,8 +190,10 @@ class Window
             {
                 $this->icon_path = $this->icon_name;
 
+                $icon_name_parts = explode("/", $this->icon_name);
+
                 $image_name = explode(
-                    ".", end(explode("/", $this->icon_name))
+                    ".", end($icon_name_parts)
                 );
                 unset($image_name[count($image_name)-1]);
                 $this->icon_name = implode(".", $image_name);
