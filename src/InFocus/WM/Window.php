@@ -183,7 +183,12 @@ class Window
                 . "| grep Icon="
             );
 
-            $this->icon_name = trim(explode("Icon=", $icon)[1]);
+            $icon_name_parts = explode("Icon=", $icon);
+
+            if(isset($icon_name_parts[1]))
+            {
+                $this->icon_name = trim($icon_name_parts[1]);
+            }
 
             // Correctly handle hard coded icon path.
             if(strstr($this->icon_name, "/") !== false)
