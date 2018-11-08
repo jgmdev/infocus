@@ -126,7 +126,9 @@ class Window
             trim(exec("ps -p {$this->process_id} -o command"))
         )[0];
 
-        $this->process_name = end(explode("/", $this->process_name));
+        $process_name_list = explode("/", $this->process_name);
+
+        $this->process_name = end($process_name_list);
 
         $current_icon_theme = $this->getCurrentIconTheme();
 
