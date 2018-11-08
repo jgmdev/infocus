@@ -71,6 +71,11 @@ runui()
     echo "(Done!)"
 }
 
+extensions="-d extension=pdo_sqlite.so"
+if [ "$(php -m | grep pdo_sqlite)" != "" ]; then
+    extensions=""
+fi
+
 case $1 in
     'ui' )
         shift 2
@@ -78,13 +83,13 @@ case $1 in
         exit
         ;;
     'log' )
-        php -d extension=pdo_sqlite.so \
+        php $extensions \
             -d open_basedir="" \
             $INFOCUS_PATH/main.php log
         exit
         ;;
 esac
 
-php -d extension=pdo_sqlite.so \
+php $extensions \
     -d open_basedir="" \
     $INFOCUS_PATH/main.php $@
